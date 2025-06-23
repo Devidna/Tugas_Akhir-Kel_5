@@ -1,5 +1,7 @@
+@dashboard
 Feature: Dashboard Hadir
 
+  @dashboardLoad @smoketest @medium @positive
   Scenario: DB-WEB-001 Menampilkan menu dashboard dengan lengkap
     Given Admin login ke halaman dashboard Hadir
     When Dashboard selesai dimuat

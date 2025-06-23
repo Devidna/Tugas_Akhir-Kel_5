@@ -1,11 +1,11 @@
-@regression @laporanKehadiran @positive
+@laporanKehadiran
 Feature: Laporan Kehadiran - Validasi kombinasi input
 
   Background:
     Given Admin login dan membuka laporan kehadiran
 
-  @LPRK-WEB-001 @filterData
-  Scenario Outline: Filter data laporan dengan kombinasi input yang berbeda
+  @filterData @smoketest @high @positive
+  Scenario Outline: Filter data laporan dengan kombinasi input valid
     When Input nama "<name>", tanggal "<date1>" hingga "<date2>", dan unit "<unit>"
     Then Data laporan kehadiran tampil
 
@@ -16,26 +16,26 @@ Feature: Laporan Kehadiran - Validasi kombinasi input
       | Kelompok 5 | Jun 19, 2025 | Jun 19, 2025 |              |
       |            | Jun 19, 2025 | Jun 19, 2025 |              |
 
-  @LPRK-WEB-002 @exportData
-  Scenario: Export data laporan
+  @exportData @sanitytest @medium @positive
+  Scenario: Export data laporan ke file
     When Input nama "Kelompok 5", tanggal "Jun 19, 2025" hingga "Jun 19, 2025", dan unit "EDC Nasional"
     Then Data laporan kehadiran tampil
     And Klik tombol export data laporan
 
-  @LPRK-WEB-003 @klikLokasi
-  Scenario: Klik lokasi dari data laporan
+  @lokasiData @sanitytest @low @positive
+  Scenario: Klik lokasi dari kolom Lokasi Masuk
     When Input nama "Kelompok 5", tanggal "Jun 19, 2025" hingga "Jun 19, 2025", dan unit "EDC Nasional"
     Then Data laporan kehadiran tampil
     And Klik lokasi dari kolom Lokasi Masuk
 
-  @LPRK-WEB-004 @negative
-  Scenario Outline: Filter data laporan negatif case
+  @filterData @sanitytest @medium @negative
+  Scenario Outline: Filter data laporan dengan kombinasi input tidak valid
     When Input nama "<name>", tanggal "<date1>" hingga "<date2>", dan unit "<unit>"
     Then Data laporan kehadiran tidak tampil
 
     Examples:
       | name       | date1 | date2 | unit         |
       | Kelompok 5 |       |       | EDC Nasional |
-      |            |       |       |              |
       | Kelompok 5 |       |       |              |
       |            |       |       | EDC Nasional |
+      |            |       |       |              |
