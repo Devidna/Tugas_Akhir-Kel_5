@@ -31,6 +31,7 @@ public class DashboardPage {
     public DashboardPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
+//        kucing
     }
 
     public void bukaMenuDashboard() {
