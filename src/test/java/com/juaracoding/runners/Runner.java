@@ -11,10 +11,12 @@ import io.cucumber.testng.CucumberOptions;
         "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
 }, glue = {
         "com.juaracoding.hooks",
-        "com.juaracoding.authentication",
-        "com.juaracoding.dashboard",
-        "com.juaracoding.laporan"
+        "com.juaracoding.steps.laporanSemua",
+        "com.juaracoding.steps.loginLogout",
+
 })
 public class Runner extends AbstractTestNGCucumberTests {
 
 }
+
+
