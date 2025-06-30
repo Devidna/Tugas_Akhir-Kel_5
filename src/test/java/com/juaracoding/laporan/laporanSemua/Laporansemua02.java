@@ -2,6 +2,7 @@ package com.juaracoding.laporan.laporanSemua;
 
 import com.juaracoding.DriverSingleton;
 import com.juaracoding.laporanPages.LaporanSemuaPage;
+import com.juaracoding.utils.ExtentReportUtil;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -30,6 +31,7 @@ public class Laporansemua02 {
     @And("Masukkan nama yang kosong {string}")
     public void masukkanNamaYangSesuai(String nama) {
         laporanSemuaPage.inputNama(nama);
+        ExtentReportUtil.logWithScreenshot("- Masukkan Nama", driver);
     }
 
     @And("Pilih start date {string} dan end date {string} untuk memilih tanggal data laporan semua 02")
@@ -37,6 +39,7 @@ public class Laporansemua02 {
         laporanSemuaPage.dateButton();
         laporanSemuaPage.setStartDate(startDate);
         laporanSemuaPage.setEndDate(endDate);
+        ExtentReportUtil.logWithScreenshot("- Masukkan Tanggal", driver);
     }
 
     @And("Klik tombol filter untuk melakukan filter berdasarkan department 02")
@@ -48,6 +51,7 @@ public class Laporansemua02 {
             throw new RuntimeException(e);
         }
         laporanSemuaPage.searchDepartemen("EDC Nasional");
+        ExtentReportUtil.logWithScreenshot("- Memilih Departemen", driver);
         laporanSemuaPage.klikTerapkanFilter();
     }
 
@@ -63,7 +67,7 @@ public class Laporansemua02 {
 
         for (WebElement row : rows) {
             String nama = row.findElement(By.cssSelector("td:nth-child(2) h6")).getText();
-            System.out.println("Row ditemukan dengan nama: " + nama); // debug
+            ExtentReportUtil.logInfo("Row ditemukan dengan nama: " + nama);
             if (nama.equalsIgnoreCase("komar")) {
                 dataDitemukan = true;
                 break;

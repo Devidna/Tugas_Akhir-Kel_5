@@ -14,7 +14,7 @@ import org.testng.Assert;
 
 import java.time.Duration;
 
-public class LogoutAccount {
+public class AuthenticationLogoutTestStep {
     WebDriver driver;
     SignInPage signInPage;
     ProfilPage profilepage;

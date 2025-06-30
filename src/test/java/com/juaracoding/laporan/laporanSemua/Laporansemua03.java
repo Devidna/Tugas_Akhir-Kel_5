@@ -2,6 +2,7 @@ package com.juaracoding.laporan.laporanSemua;
 
 import com.juaracoding.DriverSingleton;
 import com.juaracoding.laporanPages.LaporanSemuaPage;
+import com.juaracoding.utils.ExtentReportUtil;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -32,6 +33,7 @@ public class Laporansemua03 {
     @And("Masukkan nama yang sesuai {string} 03")
     public void masukkanNamaYangSesuai(String nama) {
         laporanSemuaPage.inputNama(nama);
+        ExtentReportUtil.logWithScreenshot("- Masukkan Nama", driver);
     }
 
 
@@ -44,6 +46,7 @@ public class Laporansemua03 {
             throw new RuntimeException(e);
         }
         laporanSemuaPage.searchDepartemen("EDC Nasional");
+        ExtentReportUtil.logWithScreenshot("- Memilih Departemen", driver);
         laporanSemuaPage.klikTerapkanFilter();
     }
 

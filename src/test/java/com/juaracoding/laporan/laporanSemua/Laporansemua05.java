@@ -2,6 +2,7 @@ package com.juaracoding.laporan.laporanSemua;
 
 import com.juaracoding.DriverSingleton;
 import com.juaracoding.laporanPages.LaporanSemuaPage;
+import com.juaracoding.utils.ExtentReportUtil;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -32,6 +33,7 @@ public class Laporansemua05 {
     @And("Masukkan nama kosong {string}")
     public void masukkanNamaYangSesuai(String nama) {
         laporanSemuaPage.inputNama(nama);
+        ExtentReportUtil.logWithScreenshot("- Masukkan Nama", driver);
     }
 
     @And("Pilih start date {string} dan end date {string} dan kosongkan keduanya")

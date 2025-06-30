@@ -3,6 +3,7 @@ package com.juaracoding.laporan.laporanSemua;
 import com.juaracoding.DriverSingleton;
 import com.juaracoding.authentication.LoginHelper;
 import com.juaracoding.laporanPages.LaporanSemuaPage;
+import com.juaracoding.utils.ExtentReportUtil;
 import io.cucumber.java.en.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -25,8 +26,6 @@ public class Laporansemua01 {
         driver = DriverSingleton.createOrGetDriver();
         LoginHelper loginHelper = new LoginHelper(driver);
         loginHelper.performLogin("admin@hadir.com", "MagangSQA_JC@123");
-
-
     }
 
     @When("Klik menu laporan semua")
@@ -38,6 +37,7 @@ public class Laporansemua01 {
     @And("Masukkan nama yang sesuai {string}")
     public void masukkanNamaYangSesuai(String nama) {
         laporanSemuaPage.inputNama(nama);
+        ExtentReportUtil.logWithScreenshot("- Masukkan Nama", driver);
     }
 
     @And("Pilih start date {string} dan end date {string} untuk memilih tanggal data laporan semua")
@@ -45,6 +45,7 @@ public class Laporansemua01 {
         laporanSemuaPage.dateButton();
         laporanSemuaPage.setStartDate(startDate);
         laporanSemuaPage.setEndDate(endDate);
+        ExtentReportUtil.logWithScreenshot("- Masukkan Tanggal", driver);
     }
 
     @And("Klik tombol filter untuk melakukan filter berdasarkan department")
@@ -56,6 +57,7 @@ public class Laporansemua01 {
             throw new RuntimeException(e);
         }
         laporanSemuaPage.searchDepartemen("EDC Nasional");
+        ExtentReportUtil.logWithScreenshot("- Memilih Departemen", driver);
         laporanSemuaPage.klikTerapkanFilter();
     }
 
