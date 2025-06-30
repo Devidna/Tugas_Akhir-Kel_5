@@ -34,8 +34,8 @@ Feature: Laporan semua
     Then Klik tombol search 03
 
     Examples:
-      | nama         | startDate  | endDate    |
-      |   komar      |  |  |
+      | nama  |
+      | komar |
 
   Scenario Outline: Menampilkan  data laporan semua dengan tidak memilih filter departement
     When Klik menu laporan semua 04

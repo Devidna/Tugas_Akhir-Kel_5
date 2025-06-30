@@ -9,8 +9,8 @@ import java.time.Duration;
 
 public class LoginHelper {
 
-    private WebDriver driver;
-    private SignInPage signInPage;
+    WebDriver driver;
+    SignInPage signInPage;
 
     public LoginHelper(WebDriver driver) {
         this.driver = driver;
