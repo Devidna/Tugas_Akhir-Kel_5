@@ -20,7 +20,5 @@ public class BaseLoginTest {
         signInPage = new SignInPage(driver);
 
         signInPage.login("admin@hadir.com", "MagangSQA_JC@123");
-
-        utils.delay(3);
     }
 }

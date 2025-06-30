@@ -1,6 +1,7 @@
 package com.juaracoding.authentication;
 
 import com.juaracoding.utils.ExtentReportUtil;
+import com.juaracoding.utils.ScenarioContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -19,6 +20,7 @@ public class AuthenticationSignInTestStep {
 
     @Given("Buka halaman login untuk pengujian login valid")
     public void testStep01() {
+        System.out.println("[TEST] " + ScenarioContext.getScenarioName());
         driver = DriverSingleton.createOrGetDriver();
         driver.get("https://magang.dikahadir.com/authentication/login");
         signInPage = new SignInPage(driver);

@@ -15,6 +15,11 @@ public class utils {
         }
     }
 
+    public static void waitForUrlContains(WebDriver driver, String urlPart, int timeoutSeconds) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
+        wait.until(ExpectedConditions.urlContains(urlPart));
+    }
+
     public static void waitUntilVisible(WebDriver driver, WebElement element, int timeoutInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
         wait.until(ExpectedConditions.visibilityOf(element));

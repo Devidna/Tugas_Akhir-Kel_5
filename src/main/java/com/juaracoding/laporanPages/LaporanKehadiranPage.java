@@ -32,20 +32,26 @@ public class LaporanKehadiranPage {
     @FindBy(xpath = "// input[@placeholder='Continuous']")
     private WebElement setEndDate;
 
+    @FindBy(xpath = "//input[@placeholder='Start Date']")
+    private WebElement setStartDate2;
+
+    @FindBy(xpath = "//input[@placeholder='End Date']")
+    private WebElement setEndDate2;
+
     @FindBy(xpath = "//input[@placeholder='Cari Departemen']")
     private WebElement selectUnit;
 
     @FindBy(xpath = "//*[@id=\"__next\"]/div/div[2]/div/div[1]/div/div[1]/div/div[2]/form/div/div[2]/div/button[1]")
     private WebElement btnFilter;
 
-    @FindBy(xpath = "//button[contains(@class, 'MuiButton-textSecondary')]")
-    private WebElement btnBatal;
-
     @FindBy(xpath = "//button[@type='submit' and contains(@class, 'MuiButton-containedPrimary') and contains(text(), 'Terapkan')]")
     private WebElement btnFilterTerapkan;
 
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement btnSearch;
+
+    @FindBy(xpath = "//button[@type='button' and contains(text(), 'Reset')]")
+    private WebElement btnReset;
 
     @FindBy(xpath = "//h6[contains(@class, 'MuiTypography-root')]/a[contains(@href, 'maps')]")
     private WebElement linkLihatLokasi;
@@ -55,6 +61,12 @@ public class LaporanKehadiranPage {
 
     @FindBy(xpath = "//*[@id=\"generate-report\"]/div[2]/button[1]")
     private WebElement btnExportData;
+
+    @FindBy(xpath = "//*[contains(text(),'Maaf terjadi kesalahan pada server')]")
+    private WebElement toastErrorExport;
+
+    @FindBy(xpath = "//div[@role='combobox']")
+    private WebElement showPageDropdown;
 
     @FindBy(xpath = "//tbody/tr")
     private List<WebElement> tableRows;
@@ -90,7 +102,11 @@ public class LaporanKehadiranPage {
         setEndDate.sendKeys(Keys.DELETE);
         setEndDate.sendKeys(endDate);
         utils.delay(2);
+    }
+
+    public void klikSave() {
         btnSave.click();
+        utils.delay(2);
     }
 
     public void pilihDepartemen(String departemen) {
@@ -109,11 +125,6 @@ public class LaporanKehadiranPage {
         utils.delay(2);
     }
 
-    public void klikBatal() {
-        btnBatal.click();
-        utils.delay(2);
-    }
-
     public void KlikFilterTerapkan() {
         btnFilterTerapkan.click();
         utils.delay(2);
@@ -122,6 +133,26 @@ public class LaporanKehadiranPage {
     public void klikSearch() throws InterruptedException {
         btnSearch.click();
         utils.delay(2);
+    }
+
+    public void klikReset() {
+        btnReset.click();
+        utils.delay(2);
+    }
+
+    private boolean isNullOrEmpty(String value) {
+        return value == null || value.isEmpty();
+    }
+
+    public boolean isFormKosong() {
+        try {
+            return isNullOrEmpty(inputNama.getAttribute("value")) &&
+                    isNullOrEmpty(setStartDate2.getAttribute("value")) &&
+                    isNullOrEmpty(setEndDate2.getAttribute("value"));
+        } catch (Exception e) {
+            System.out.println("Gagal cek form kosong setelah reset: " + e.getMessage());
+            return false;
+        }
     }
 
     public void klikLihatLokasi() {
@@ -139,6 +170,22 @@ public class LaporanKehadiranPage {
         btnExport.click();
         utils.delay(2);
         btnExportData.click();
+        utils.delay(2);
+    }
+
+    public boolean isExportErrorToastDisplayed() {
+        try {
+            return toastErrorExport.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    public void pilihShowPage(String jumlah) {
+        showPageDropdown.click();
+        WebElement opsiJumlah = driver.findElement(By.xpath("//li[normalize-space(text())='" + jumlah + "']"));
+        opsiJumlah.click();
+        utils.delay(2);
     }
 
     public String getTableRowText(int index) {

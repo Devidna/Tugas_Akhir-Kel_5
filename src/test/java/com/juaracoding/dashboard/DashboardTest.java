@@ -4,6 +4,7 @@ import com.juaracoding.authentication.BaseLoginTest;
 import com.juaracoding.dashboardPages.DashboardPage;
 import com.juaracoding.DriverSingleton;
 import com.juaracoding.utils.ExtentReportUtil;
+import com.juaracoding.utils.ScenarioContext;
 import io.cucumber.java.en.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -14,6 +15,7 @@ public class DashboardTest  extends BaseLoginTest {
 
     @Given("Admin login ke halaman dashboard Hadir")
     public void loginKeDashboard() {
+        System.out.println("[TEST] " + ScenarioContext.getScenarioName());
         driver = DriverSingleton.createOrGetDriver();
         DP = new DashboardPage(driver);
 

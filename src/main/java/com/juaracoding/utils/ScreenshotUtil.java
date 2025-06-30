@@ -18,9 +18,16 @@ public class ScreenshotUtil {
             scenarioName = "UnknownScenario";
         }
 
-        String fileName = scenarioName.replaceAll(" ", "_") + "_" + stepName.replaceAll(" ", "_") + "_" + ".png";
+        String cleanScenarioName = scenarioName.replaceAll("[^a-zA-Z0-9-_]", "_");
+        String cleanStepName = stepName.replaceAll("[^a-zA-Z0-9-_]", "_");
+
+        String fileName = cleanScenarioName + "_" + cleanStepName + ".png";
         String relativePath = folder + fileName;
         String fullPath = "target/" + relativePath;
+
+//        String fileName = scenarioName.replaceAll(" ", "_") + "_" + stepName.replaceAll(" ", "_") + "_" + ".png";
+//        String relativePath = folder + fileName;
+//        String fullPath = "target/" + relativePath;
 
         File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         try {
