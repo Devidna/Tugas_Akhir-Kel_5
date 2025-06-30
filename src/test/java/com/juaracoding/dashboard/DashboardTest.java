@@ -1,15 +1,15 @@
 package com.juaracoding.dashboard;
 
-import com.juaracoding.authentication.BaseLoginTest;
 import com.juaracoding.dashboardPages.DashboardPage;
 import com.juaracoding.DriverSingleton;
+import com.juaracoding.authentication.LoginHelper;
 import com.juaracoding.utils.ExtentReportUtil;
 import com.juaracoding.utils.ScenarioContext;
 import io.cucumber.java.en.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
-public class DashboardTest  extends BaseLoginTest {
+public class DashboardTest {
     WebDriver driver;
     DashboardPage DP;
 
@@ -19,7 +19,9 @@ public class DashboardTest  extends BaseLoginTest {
         driver = DriverSingleton.createOrGetDriver();
         DP = new DashboardPage(driver);
 
-        baseLogin();
+        LoginHelper loginHelper = new LoginHelper(driver);
+        loginHelper.performLogin("admin@hadir.com", "MagangSQA_JC@123");
+
         DP.bukaMenuDashboard();
 
         ExtentReportUtil.logInfo("Admin berhasil login dan membuka dashboard");

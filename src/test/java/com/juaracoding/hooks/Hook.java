@@ -21,6 +21,7 @@ public class Hook {
         tagPrefixMap.put("@laporanKehadiran", "LPRK-WEB-");
         tagPrefixMap.put("@dashboard", "DB-WEB-");
         tagPrefixMap.put("@authentication", "AUTH-WEB-");
+        tagPrefixMap.put("@laporanSemua", "LPRS-WEB-");
         // Tambahkan tag lain jika ada feature baru
     }
 

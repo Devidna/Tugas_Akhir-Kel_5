@@ -1,7 +1,7 @@
 package com.juaracoding.laporan.laporanKehadiran;
 
-import com.juaracoding.authentication.BaseLoginTest;
 import com.juaracoding.DriverSingleton;
+import com.juaracoding.authentication.LoginHelper;
 import com.juaracoding.laporanPages.LaporanKehadiranPage;
 import com.juaracoding.utils.ExtentReportUtil;
 import com.juaracoding.utils.ScenarioContext;
@@ -10,7 +10,7 @@ import io.cucumber.java.en.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
-public class LaporanKehadiranTest extends BaseLoginTest {
+public class LaporanKehadiranTest {
     WebDriver driver;
     LaporanKehadiranPage lKP;
 
@@ -20,7 +20,9 @@ public class LaporanKehadiranTest extends BaseLoginTest {
         driver = DriverSingleton.createOrGetDriver();
         lKP = new LaporanKehadiranPage(driver);
 
-        baseLogin();
+        LoginHelper loginHelper = new LoginHelper(driver);
+        loginHelper.performLogin("admin@hadir.com", "MagangSQA_JC@123");
+
         utils.delay(3);
         lKP.bukaMenuLaporanKehadiran();
         utils.waitForUrlContains(driver, "/laporan/activity", 5);

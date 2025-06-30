@@ -1,23 +1,20 @@
 package com.juaracoding.authentication;
 
-import com.juaracoding.utils.ExtentReportUtil;
-import com.juaracoding.utils.ScenarioContext;
-import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
-
 import com.juaracoding.DriverSingleton;
 import com.juaracoding.loginPages.SignInPage;
-
+import com.juaracoding.utils.ScenarioContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
-public class AuthenticationInvalidSignInTestStep {
+public class AuthenticationInvalidSignInTestStep05 {
     WebDriver driver;
     SignInPage signInPage;
 
-    @Given("Buka halaman login untuk pengujian login invalid")
+    @Given("Buka halaman login untuk pengujian login invalid 05")
     public void testStep01() {
         System.out.println("[TEST] " + ScenarioContext.getScenarioName());
         driver = DriverSingleton.createOrGetDriver();
@@ -25,28 +22,22 @@ public class AuthenticationInvalidSignInTestStep {
         signInPage = new SignInPage(driver);
     }
 
-    @When("Masukkan username {string} dan password {string} tidak valid")
+    @When("Masukkan username kosong {string} dan password valid {string}")
     public void testStep02(String username, String password) {
         signInPage.setUsername(username);
-        ExtentReportUtil.logInfo("Masukkan username");
-        ExtentReportUtil.logWithScreenshot("- Masukkan username", driver);
         signInPage.setPassword(password);
-        ExtentReportUtil.logInfo("Masukkan password");
-        ExtentReportUtil.logWithScreenshot("- Masukkan password", driver);
     }
 
-    @And("Klik tombol login untuk login tidak valid")
+    @And("Klik tombol login untuk login tidak valid 05")
     public void testStep03() {
         signInPage.onClick();
     }
 
-    @Then("Pengguna akan melihat pesan error")
+    @Then("Pengguna akan melihat pesan error 05")
     public void testStep04() {
         String expected = "Akun tidak ditemukan";
         String actual = signInPage.getaccNotfound();
 
-        ExtentReportUtil.logInfo("Akun tidak ditemukan");
-        ExtentReportUtil.logWithScreenshot("- Akun tidak ditemukan", driver);
         Assert.assertEquals(actual, expected);
     }
 }
