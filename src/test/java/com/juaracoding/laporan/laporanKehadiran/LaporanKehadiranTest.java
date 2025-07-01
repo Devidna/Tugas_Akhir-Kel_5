@@ -25,7 +25,7 @@ public class LaporanKehadiranTest {
 
         utils.delay(3);
         lKP.bukaMenuLaporanKehadiran();
-        utils.waitForUrlContains(driver, "/laporan/activity", 10);
+        utils.waitForUrlContains(driver, "/laporan/activity", 5);
 
         ExtentReportUtil.logInfo("Berhasil login dan membuka halaman laporan kehadiran");
         ExtentReportUtil.logWithScreenshot("- Halaman awal laporan", driver);

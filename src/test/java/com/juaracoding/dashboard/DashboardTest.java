@@ -25,7 +25,7 @@ public class DashboardTest {
 
         utils.delay(3);
         DP.bukaMenuDashboard();
-        utils.waitForUrlContains(driver, "/dashboard/dashboard", 10);
+        utils.waitForUrlContains(driver, "/dashboard/dashboard", 5);
 
         ExtentReportUtil.logInfo("Admin berhasil login dan membuka dashboard");
         ExtentReportUtil.logWithScreenshot("- Halaman Dashboard", driver);
