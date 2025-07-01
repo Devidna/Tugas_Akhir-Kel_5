@@ -1,7 +1,7 @@
 @authentication
 Feature: Authentication feature test
 
-  @validLogin @smoketest @high @positive
+  @smoketest @high @positive
   Scenario Outline: Login dengan email dan password yang valid
     Given Buka halaman login untuk pengujian login valid
     When Masukkan username "<username>" dan password "<password>" valid
@@ -12,7 +12,7 @@ Feature: Authentication feature test
       | username        | password         |
       | admin@hadir.com | MagangSQA_JC@123 |
 
-  @invalidNoEmail @sanitytest @medium @negative
+  @sanitytest @medium @negative
   Scenario Outline: Login dengan email yang tidak terdaftar
     Given Buka halaman login untuk pengujian login invalid
     When Masukkan username "<username>" dan password "<password>" tidak valid
@@ -23,7 +23,7 @@ Feature: Authentication feature test
       | username       | password       |
       | admiiin@hair.com | MagangSQA_JC@123 |
 
-  @invalidEmail @sanitytest @medium @negative
+  @sanitytest @medium @negative
   Scenario Outline: Login dengan email yang tidak menggunakan simbol "@"
     Given Buka halaman login untuk pengujian login invalid 02
     When Masukkan username "<username>" dan password "<password>" tidak valid 02
@@ -34,7 +34,7 @@ Feature: Authentication feature test
       | username       | password       |
       | adminhair.com | MagangSQA_JC@123 |
 
-  @invalidPass @sanitytest @medium @negative
+  @sanitytest @medium @negative
   Scenario Outline: Login dengan password yang salah
     Given Buka halaman login untuk pengujian login invalid 03
     When Masukkan username valid "<username>" dan password salah "<password>"
@@ -45,7 +45,7 @@ Feature: Authentication feature test
       | username       | password       |
       | admin@hadir.com | password_salah |
 
-  @invalidZeroPass @sanitytest @medium @negative
+  @sanitytest @medium @negative
   Scenario Outline: Login dengan password kosong
     Given Buka halaman login untuk pengujian login invalid 04
     When Masukkan username valid "<username>" dan kosongkan password "<password>"
@@ -56,7 +56,7 @@ Feature: Authentication feature test
       | username       | password       |
       | admin@hadir.com |  |
 
-  @invalidZeroEmail @sanitytest @medium @negative
+  @sanitytest @medium @negative
   Scenario Outline: Login dengan email kosong
     Given Buka halaman login untuk pengujian login invalid 05
     When Masukkan username kosong "<username>" dan password valid "<password>"
@@ -67,7 +67,7 @@ Feature: Authentication feature test
       | username       | password       |
       |  | MagangSQA_JC@123 |
 
-  @invalidEmailPass @sanitytest @medium @negative
+  @sanitytest @medium @negative
   Scenario Outline: Login dengan email dan password kosong
     Given Buka halaman login untuk pengujian login invalid 06
     When Masukkan username kosong "<username>" dan password kosong "<password>"
@@ -78,7 +78,7 @@ Feature: Authentication feature test
       | username       | password       |
       |  |  |
 
-  @logout @sanitytest @medium @negative
+  @sanitytest @medium @negative
   Scenario Outline: Verifikasi Log out akun
     Given Buka halaman login
     When Masukkan username "<username>" dan password "<password>"  valid
