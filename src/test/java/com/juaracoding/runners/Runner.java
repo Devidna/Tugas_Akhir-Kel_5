@@ -3,7 +3,7 @@ package com.juaracoding.runners;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
-@CucumberOptions(tags = "@laporanKehadiran", features = {
+@CucumberOptions(tags = "@dashboard or @laporanKehadiran", features = {
         "src/test/resources/features"
 }, plugin = { "pretty:target/pretty.txt",
         "html:target/cucumber-reports/index.html",

@@ -29,8 +29,8 @@ public class LaporanKehadiranTest extends BaseLoginTest {
         ExtentReportUtil.logWithScreenshot("- Halaman awal laporan", driver);
     }
 
-    @When("Input nama {string}, tanggal {string} hingga {string}, dan unit {string}")
-    public void isiFormLaporan(String nama, String start, String end, String dept) throws InterruptedException {
+    @When("Input nama {string}, tanggal {string} hingga {string}, dan unit {string}, dengan filter {string}")
+    public void isiFormLaporan(String nama, String start, String end, String dept, String applyFilter) throws InterruptedException {
         ExtentReportUtil.logInfo("Input form: nama=" + nama + ", tanggal=" + start + " - " + end + ", unit=" + dept);
 
         if (!nama.isEmpty()) {
@@ -46,7 +46,9 @@ public class LaporanKehadiranTest extends BaseLoginTest {
             lKP.klikFilter();
             lKP.pilihDepartemen(dept);
             ExtentReportUtil.logWithScreenshot("- Memilih Departemen", driver);
-            lKP.KlikFilterTerapkan();
+            if (applyFilter.equalsIgnoreCase("yes")) {
+                lKP.KlikFilterTerapkan();
+            }
         }
         lKP.klikSearch();
         ExtentReportUtil.logWithScreenshot("- Setelah klik search", driver);

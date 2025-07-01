@@ -32,7 +32,6 @@ public class DashboardTest  extends BaseLoginTest {
         Assert.assertTrue(isDisplayed, "Judul Dashboard tidak tampil");
 
         ExtentReportUtil.logInfo("Judul dashboard tampil dengan benar");
-        ExtentReportUtil.logWithScreenshot("- Judul Dashboard", driver);
     }
 
     @Then("Semua elemen utama dashboard tampil dengan benar")
@@ -41,6 +40,5 @@ public class DashboardTest  extends BaseLoginTest {
         Assert.assertTrue(allDisplayed, "Beberapa elemen dashboard tidak tampil");
 
         ExtentReportUtil.logPass("Semua elemen utama dashboard tampil dengan benar");
-        ExtentReportUtil.logWithScreenshot("- elemen utama Dashboard", driver);
     }
 }

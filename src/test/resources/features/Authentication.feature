@@ -1,7 +1,7 @@
 @authentication
 Feature: Authentication feature test
 
-  @validLogin @smoketest @high @positive
+  @smoketest @high @positive
   Scenario Outline: Login dengan email dan password yang valid
     Given Buka halaman login untuk pengujian login valid
     When Masukkan username "<username>" dan password "<password>" valid
@@ -12,7 +12,7 @@ Feature: Authentication feature test
       | username        | password           |
       | admin@hadir.com | MagangSQA_JC@123   |
 
-  @invalidLogin @sanitytest @medium @negative
+  @sanitytest @medium @negative
   Scenario Outline: Login dengan email yang tidak terdaftar
     Given Buka halaman login untuk pengujian login invalid
     When Masukkan username "<username>" dan password "<password>" tidak valid
