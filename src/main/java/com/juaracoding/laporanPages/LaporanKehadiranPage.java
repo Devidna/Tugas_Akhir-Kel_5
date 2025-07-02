@@ -123,9 +123,6 @@ public class LaporanKehadiranPage {
             utils.delay(1);
             selectUnit.sendKeys(Keys.ENTER);
             utils.delay(1);
-        } else {
-            selectUnit.sendKeys(Keys.ENTER);
-            utils.delay(1);
         }
     }
 
