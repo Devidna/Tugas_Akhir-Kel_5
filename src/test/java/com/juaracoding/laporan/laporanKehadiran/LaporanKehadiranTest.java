@@ -81,7 +81,7 @@ public class LaporanKehadiranTest {
         if (isKosong) {
             ExtentReportUtil.logPass("Form berhasil dikosongkan setelah reset");
         } else {
-            ExtentReportUtil.logFailWithScreenshot("Form tidak kosong setelah reset", driver);
+            ExtentReportUtil.logFail("Form tidak kosong setelah reset");
             Assert.fail("Form tidak kosong setelah reset");
         }
     }
@@ -89,7 +89,7 @@ public class LaporanKehadiranTest {
     @Then("Cek hasil export data laporan")
     public void cekHasilExport() {
         if (lKP.isExportErrorToastDisplayed()) {
-            ExtentReportUtil.logFailWithScreenshot("Export gagal: Muncul error toast", driver);
+            ExtentReportUtil.logFail("Export gagal: Muncul error toast");
             Assert.fail("Export gagal: Muncul error toast");
         } else {
             ExtentReportUtil.logPass("Export berhasil tanpa error toast");
@@ -104,7 +104,7 @@ public class LaporanKehadiranTest {
         if (String.valueOf(rowCount).equals(expectedRowCount)) {
             ExtentReportUtil.logPass("Jumlah baris sesuai dengan yang dipilih");
         } else {
-            ExtentReportUtil.logFailWithScreenshot("Jumlah baris tidak sesuai. Expected: " + expectedRowCount + ", Actual: " + rowCount, driver);
+            ExtentReportUtil.logFail("Jumlah baris tidak sesuai. Expected: " + expectedRowCount + ", Actual: " + rowCount);
             Assert.fail("Jumlah baris tidak sesuai. Expected: " + expectedRowCount + ", Actual: " + rowCount);
         }
     }
@@ -119,7 +119,7 @@ public class LaporanKehadiranTest {
         if (rowCount > 0 && rowText != null && !rowText.isEmpty()) {
             ExtentReportUtil.logPass("Data laporan kehadiran tampil");
         } else {
-            ExtentReportUtil.logFailWithScreenshot("Data seharusnya tampil, tetapi tidak ditemukan.", driver);
+            ExtentReportUtil.logFail("Data seharusnya tampil, tetapi tidak ditemukan.");
             Assert.fail("Data seharusnya tampil, tetapi tidak ditemukan.");
         }
     }
@@ -132,7 +132,7 @@ public class LaporanKehadiranTest {
         if (rowCount == 0) {
             ExtentReportUtil.logPass("Data laporan kehadiran tidak tampil sesuai harapan");
         } else {
-            ExtentReportUtil.logFailWithScreenshot("Data seharusnya tidak tampil, tetapi ditemukan " + rowCount + " baris.", driver);
+            ExtentReportUtil.logFail("Data seharusnya tidak tampil, tetapi ditemukan " + rowCount + " baris.");
             Assert.fail("Data seharusnya tidak tampil, tetapi ditemukan " + rowCount + " baris.");
         }
     }

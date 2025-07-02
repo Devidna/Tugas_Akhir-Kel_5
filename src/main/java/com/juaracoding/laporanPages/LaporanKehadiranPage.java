@@ -152,12 +152,9 @@ public class LaporanKehadiranPage {
 
     public boolean isFormKosong() {
         try {
-            btnFilter.click();
-            utils.delay(2);
             return isNullOrEmpty(inputNama.getAttribute("value")) &&
                     isNullOrEmpty(setStartDate2.getAttribute("value")) &&
-                    isNullOrEmpty(setEndDate2.getAttribute("value")) &&
-                    isNullOrEmpty(selectUnit.getAttribute("value"));
+                    isNullOrEmpty(setEndDate2.getAttribute("value"));
         } catch (Exception e) {
             System.out.println("Gagal cek form kosong setelah reset: " + e.getMessage());
             return false;
