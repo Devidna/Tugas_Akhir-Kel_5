@@ -1,11 +1,43 @@
 package com.juaracoding.utils;
 
+import io.cucumber.java.Scenario;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class ScenarioContext {
 
     private static final ThreadLocal<String> scenarioName = new ThreadLocal<>();
 
-    public static void setScenarioName(String name) {
-        scenarioName.set(name);
+    private static final Map<String, Integer> tagCounters = new HashMap<>();
+    private static final Map<String, String> tagPrefixMap = new HashMap<>();
+
+    static {
+        tagPrefixMap.put("@laporanKehadiran", "LPRK-WEB-");
+        tagPrefixMap.put("@dashboard", "DB-WEB-");
+        tagPrefixMap.put("@authentication", "AUTH-WEB-");
+        // Tambahkan tag lain jika ada
+    }
+
+    public static void generateScenarioName(Scenario scenario) {
+        String originalName = scenario.getName();
+        String prefix = "";
+        String finalScenarioName = originalName;
+
+        for (String tag : scenario.getSourceTagNames()) {
+            if (tagPrefixMap.containsKey(tag)) {
+                prefix = tagPrefixMap.get(tag);
+
+                int count = tagCounters.getOrDefault(tag, 0) + 1;
+                tagCounters.put(tag, count);
+
+                String formattedNumber = String.format("%03d", count);
+                finalScenarioName = prefix + formattedNumber + " - " + originalName;
+                break;
+            }
+        }
+
+        scenarioName.set(finalScenarioName);
     }
 
     public static String getScenarioName() {

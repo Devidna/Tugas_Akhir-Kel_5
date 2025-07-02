@@ -68,6 +68,9 @@ public class LaporanKehadiranPage {
     @FindBy(xpath = "//div[@role='combobox']")
     private WebElement showPageDropdown;
 
+    @FindBy(xpath = "//li[contains(@class,'MuiAutocomplete-option')]")
+    private List<WebElement> dropdownSuggest;
+
     @FindBy(xpath = "//tbody/tr")
     private List<WebElement> tableRows;
 
@@ -76,7 +79,7 @@ public class LaporanKehadiranPage {
         PageFactory.initElements(driver, this);
     }
 
-    public void bukaMenuLaporanKehadiran() throws InterruptedException {
+    public void bukaMenuLaporanKehadiran() {
         menuLaporan.click();
         utils.delay(2);
         subMenuKehadiran.click();
@@ -114,10 +117,20 @@ public class LaporanKehadiranPage {
         selectUnit.click();
         selectUnit.sendKeys(departemen);
         utils.delay(2);
-        selectUnit.sendKeys(Keys.ARROW_DOWN);
-        utils.delay(2);
-        selectUnit.sendKeys(Keys.ENTER);
-        utils.delay(2);
+
+        if (isSuggestionVisible()) {
+            selectUnit.sendKeys(Keys.ARROW_DOWN);
+            utils.delay(1);
+            selectUnit.sendKeys(Keys.ENTER);
+            utils.delay(1);
+        } else {
+            selectUnit.sendKeys(Keys.ENTER);
+            utils.delay(1);
+        }
+    }
+
+    private boolean isSuggestionVisible() {
+        return dropdownSuggest != null && !dropdownSuggest.isEmpty();
     }
 
     public void klikFilter() {
@@ -130,7 +143,7 @@ public class LaporanKehadiranPage {
         utils.delay(2);
     }
 
-    public void klikSearch() throws InterruptedException {
+    public void klikSearch() {
         btnSearch.click();
         utils.delay(2);
     }
@@ -138,10 +151,6 @@ public class LaporanKehadiranPage {
     public void klikReset() {
         btnReset.click();
         utils.delay(2);
-    }
-
-    private boolean isNullOrEmpty(String value) {
-        return value == null || value.isEmpty();
     }
 
     public boolean isFormKosong() {
@@ -158,15 +167,8 @@ public class LaporanKehadiranPage {
         }
     }
 
-    public void klikLihatLokasi() {
-        try {
-            if (linkLihatLokasi.isDisplayed()) {
-                linkLihatLokasi.click();
-                utils.delay(2);
-            }
-        } catch (Exception e) {
-            System.out.println("Link lihat lokasi tidak ditemukan.");
-        }
+    private boolean isNullOrEmpty(String value) {
+        return value == null || value.isEmpty();
     }
 
     public void klikExport() {
@@ -181,6 +183,17 @@ public class LaporanKehadiranPage {
             return toastErrorExport.isDisplayed();
         } catch (NoSuchElementException e) {
             return false;
+        }
+    }
+
+    public void klikLihatLokasi() {
+        try {
+            if (linkLihatLokasi.isDisplayed()) {
+                linkLihatLokasi.click();
+                utils.delay(2);
+            }
+        } catch (Exception e) {
+            System.out.println("Link lihat lokasi tidak ditemukan.");
         }
     }
 
