@@ -37,15 +37,13 @@ public class Laporansemua01 {
     @And("Masukkan nama yang sesuai {string}")
     public void masukkanNamaYangSesuai(String nama) {
         laporanSemuaPage.inputNama(nama);
-        ExtentReportUtil.logWithScreenshot("- Masukkan Nama", driver);
     }
 
     @And("Pilih start date {string} dan end date {string} untuk memilih tanggal data laporan semua")
     public void pilihTanggal(String startDate, String endDate) {
         laporanSemuaPage.dateButton();
         laporanSemuaPage.setStartDate(startDate);
-        laporanSemuaPage.setEndDate(endDate);
-        ExtentReportUtil.logWithScreenshot("- Masukkan Tanggal", driver);
+        laporanSemuaPage.setEndDate(endDate);;
     }
 
     @And("Klik tombol filter untuk melakukan filter berdasarkan department")
@@ -57,7 +55,6 @@ public class Laporansemua01 {
             throw new RuntimeException(e);
         }
         laporanSemuaPage.searchDepartemen("EDC Nasional");
-        ExtentReportUtil.logWithScreenshot("- Memilih Departemen", driver);
         laporanSemuaPage.klikTerapkanFilter();
     }
 

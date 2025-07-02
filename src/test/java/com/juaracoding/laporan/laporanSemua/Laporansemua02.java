@@ -39,7 +39,6 @@ public class Laporansemua02 {
         laporanSemuaPage.dateButton();
         laporanSemuaPage.setStartDate(startDate);
         laporanSemuaPage.setEndDate(endDate);
-        ExtentReportUtil.logWithScreenshot("- Masukkan Tanggal", driver);
     }
 
     @And("Klik tombol filter untuk melakukan filter berdasarkan department 02")
@@ -51,7 +50,6 @@ public class Laporansemua02 {
             throw new RuntimeException(e);
         }
         laporanSemuaPage.searchDepartemen("EDC Nasional");
-        ExtentReportUtil.logWithScreenshot("- Memilih Departemen", driver);
         laporanSemuaPage.klikTerapkanFilter();
     }
 

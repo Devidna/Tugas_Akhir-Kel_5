@@ -31,7 +31,6 @@ public class Laporansemua04 {
     @And("Masukkan nama yang sesuai {string} 04")
     public void masukkanNamaYangSesuai(String nama) {
         laporanSemuaPage.inputNama(nama);
-        ExtentReportUtil.logWithScreenshot("- Masukkan Nama", driver);
     }
 
     @And("Pilih start date {string} dan end date {string} untuk memilih tanggal data laporan semua 04")
@@ -39,7 +38,6 @@ public class Laporansemua04 {
         laporanSemuaPage.dateButton();
         laporanSemuaPage.setStartDate(startDate);
         laporanSemuaPage.setEndDate(endDate);
-        ExtentReportUtil.logWithScreenshot("- Masukkan Tanggal", driver);
     }
 
     @And("Klik tombol dan kosongkan filter")

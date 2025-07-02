@@ -29,10 +29,8 @@ public class AuthenticationInvalidSignInTestStep {
     public void testStep02(String username, String password) {
         signInPage.setUsername(username);
         ExtentReportUtil.logInfo("Masukkan username");
-        ExtentReportUtil.logWithScreenshot("- Masukkan username", driver);
         signInPage.setPassword(password);
         ExtentReportUtil.logInfo("Masukkan password");
-        ExtentReportUtil.logWithScreenshot("- Masukkan password", driver);
     }
 
     @And("Klik tombol login untuk login tidak valid")
@@ -46,7 +44,6 @@ public class AuthenticationInvalidSignInTestStep {
         String actual = signInPage.getaccNotfound();
 
         ExtentReportUtil.logInfo("Akun tidak ditemukan");
-        ExtentReportUtil.logWithScreenshot("- Akun tidak ditemukan", driver);
         Assert.assertEquals(actual, expected);
     }
 }

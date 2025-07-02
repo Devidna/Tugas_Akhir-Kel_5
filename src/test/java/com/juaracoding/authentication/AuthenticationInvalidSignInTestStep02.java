@@ -28,10 +28,8 @@ public class AuthenticationInvalidSignInTestStep02 {
     public void testStep02(String username, String password) {
         signInPage.setUsername(username);
         ExtentReportUtil.logInfo("Masukkan username");
-        ExtentReportUtil.logWithScreenshot("- Masukkan username", driver);
         signInPage.setPassword(password);
         ExtentReportUtil.logInfo("Masukkan password");
-        ExtentReportUtil.logWithScreenshot("- Masukkan password", driver);
     }
 
     @And("Klik tombol login untuk login tidak valid 02")
@@ -48,7 +46,6 @@ public class AuthenticationInvalidSignInTestStep02 {
         );
 
         ExtentReportUtil.logInfo("Validation Message: " + validationMessage);
-        ExtentReportUtil.logWithScreenshot("- Validation Message", driver);
 
         // Verifikasi pesan mengandung teks error HTML5
         assert validationMessage != null;

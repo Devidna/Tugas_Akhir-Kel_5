@@ -28,7 +28,6 @@ public class DashboardTest {
         utils.waitForUrlContains(driver, "/dashboard/dashboard", 5);
 
         ExtentReportUtil.logInfo("Admin berhasil login dan membuka dashboard");
-        ExtentReportUtil.logWithScreenshot("- Halaman Dashboard", driver);
     }
 
     @When("Dashboard selesai dimuat")

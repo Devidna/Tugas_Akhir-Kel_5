@@ -33,7 +33,6 @@ public class Laporansemua05 {
     @And("Masukkan nama kosong {string}")
     public void masukkanNamaYangSesuai(String nama) {
         laporanSemuaPage.inputNama(nama);
-        ExtentReportUtil.logWithScreenshot("- Masukkan Nama", driver);
     }
 
     @And("Pilih start date {string} dan end date {string} dan kosongkan keduanya")
