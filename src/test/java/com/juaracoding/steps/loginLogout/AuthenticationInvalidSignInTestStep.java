@@ -1,12 +1,10 @@
-package com.juaracoding.authentication;
+package com.juaracoding.steps.loginLogout;
 
-import com.juaracoding.utils.ExtentReportUtil;
-import com.juaracoding.utils.ScenarioContext;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 import com.juaracoding.DriverSingleton;
-import com.juaracoding.loginPages.SignInPage;
+import com.juaracoding.pages.SignInPage;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -19,7 +17,6 @@ public class AuthenticationInvalidSignInTestStep {
 
     @Given("Buka halaman login untuk pengujian login invalid")
     public void testStep01() {
-        System.out.println("[TEST] " + ScenarioContext.getScenarioName());
         driver = DriverSingleton.createOrGetDriver();
         driver.get("https://magang.dikahadir.com/authentication/login");
         signInPage = new SignInPage(driver);
@@ -28,11 +25,7 @@ public class AuthenticationInvalidSignInTestStep {
     @When("Masukkan username {string} dan password {string} tidak valid")
     public void testStep02(String username, String password) {
         signInPage.setUsername(username);
-        ExtentReportUtil.logInfo("Masukkan username");
-        ExtentReportUtil.logWithScreenshot("- Masukkan username", driver);
         signInPage.setPassword(password);
-        ExtentReportUtil.logInfo("Masukkan password");
-        ExtentReportUtil.logWithScreenshot("- Masukkan password", driver);
     }
 
     @And("Klik tombol login untuk login tidak valid")

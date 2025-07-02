@@ -1,4 +1,4 @@
-package com.juaracoding.loginPages;
+package com.juaracoding.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,8 +28,8 @@ public class SignInPage {
     @FindBy(xpath = "//div[contains(@class, 'MuiAlert-message')]//p[contains(text(), 'Akun tidak ditemukan')]")
     WebElement accNotFound;
 
-    @FindBy(xpath = "//*[@id=\"__next\"]/div/div/div[2]/div/div[2]/form/label[2]")
-    WebElement noSymbol;
+    @FindBy(css = "div.MuiAlert-message > p")
+    WebElement wrongUnPw;
 
     public SignInPage(WebDriver driver) {
         this.driver = driver;
@@ -56,18 +56,13 @@ public class SignInPage {
         onClick();
     }
 
-    public String getErrorMessage() {
-
-        return errorMessage.getText();
-    }
-
     public String getaccNotfound() {
         wait.until(ExpectedConditions.visibilityOf(accNotFound));
         return accNotFound.getText();
     }
 
-    public String getnoSymbol() {
-        wait.until(ExpectedConditions.visibilityOf(noSymbol));
-        return noSymbol.getText();
+    public String wrongUsernameAndPassword() {
+        wait.until(ExpectedConditions.visibilityOf(wrongUnPw));
+        return wrongUnPw.getText();
     }
 }
