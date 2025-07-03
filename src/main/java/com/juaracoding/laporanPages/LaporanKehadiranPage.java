@@ -72,6 +72,9 @@ public class LaporanKehadiranPage {
     @FindBy(xpath = "//li[contains(@class,'MuiAutocomplete-option')]")
     private List<WebElement> dropdownSuggest;
 
+    @FindBy(xpath = "//thead")
+    private WebElement tableHeader;
+
     @FindBy(xpath = "//tbody/tr")
     private List<WebElement> tableRows;
 
@@ -141,7 +144,7 @@ public class LaporanKehadiranPage {
 
     public void klikSearch() {
         utils.waitUntilClickable(driver, btnSearch, 10).click();
-        utils.waitUntilVisible(driver, driver.findElement(By.xpath("//tbody")), 10);
+        utils.waitUntilTableVisible(driver, tableRows, tableHeader, 10);
     }
 
     public void klikReset() {
