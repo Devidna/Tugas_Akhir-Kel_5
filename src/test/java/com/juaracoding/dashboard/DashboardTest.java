@@ -1,8 +1,8 @@
 package com.juaracoding.dashboard;
 
+import com.juaracoding.authentication.LoginHelper;
 import com.juaracoding.dashboardPages.DashboardPage;
 import com.juaracoding.DriverSingleton;
-import com.juaracoding.authentication.LoginHelper;
 import com.juaracoding.utils.ExtentReportUtil;
 import com.juaracoding.utils.ScenarioContext;
 import com.juaracoding.utils.utils;
@@ -25,7 +25,7 @@ public class DashboardTest {
 
         utils.delay(3);
         DP.bukaMenuDashboard();
-        utils.waitForUrlContains(driver, "/dashboard/dashboard", 5);
+        utils.waitForUrlContains(driver, "/dashboards/dashboard", 10);
 
         ExtentReportUtil.logInfo("Admin berhasil login dan membuka dashboard");
     }
@@ -33,16 +33,24 @@ public class DashboardTest {
     @When("Dashboard selesai dimuat")
     public void dashboardDimuat() {
         boolean isDisplayed = DP.isDashboardTitleDisplayed();
-        Assert.assertTrue(isDisplayed, "Judul Dashboard tidak tampil");
 
-        ExtentReportUtil.logInfo("Judul dashboard tampil dengan benar");
+        if (isDisplayed) {
+            ExtentReportUtil.logPass("Judul dashboard tampil dengan benar");
+        } else {
+            ExtentReportUtil.logFailWithScreenshot("Judul dashboard tidak tampil", driver);
+            Assert.fail("Judul dashboard tidak tampil");
+        }
     }
 
     @Then("Semua elemen utama dashboard tampil dengan benar")
     public void semuaWidgetTampil() {
         boolean allDisplayed = DP.isAllDashboardWidgetsDisplayed();
-        Assert.assertTrue(allDisplayed, "Beberapa elemen dashboard tidak tampil");
 
-        ExtentReportUtil.logPass("Semua elemen utama dashboard tampil dengan benar");
+        if (allDisplayed) {
+            ExtentReportUtil.logPass("Semua elemen utama dashboard tampil dengan benar");
+        } else {
+            ExtentReportUtil.logFailWithScreenshot("Beberapa elemen dashboard tidak tampil", driver);
+            Assert.fail("Beberapa elemen dashboard tidak tampil");
+        }
     }
 }

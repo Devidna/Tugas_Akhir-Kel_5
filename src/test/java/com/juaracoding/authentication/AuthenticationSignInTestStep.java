@@ -30,15 +30,14 @@ public class AuthenticationSignInTestStep {
     public void testStep02(String username, String password) {
         signInPage.setUsername(username);
         ExtentReportUtil.logInfo("Masukkan username");
-        ExtentReportUtil.logWithScreenshot("- Masukkan username", driver);
         signInPage.setPassword(password);
         ExtentReportUtil.logInfo("Masukkan password");
-        ExtentReportUtil.logWithScreenshot("- Masukkan password", driver);
     }
 
     @And("Klik tombol login untuk login valid")
     public void testStep03() {
         signInPage.onClick();
+        ExtentReportUtil.logInfo("Klik tombol login dilakukan");
     }
 
     @Then("Pengguna berhasil masuk ke halaman Dashboard")
@@ -48,9 +47,8 @@ public class AuthenticationSignInTestStep {
         wait.until(ExpectedConditions.urlContains("/dashboards/pending"));
 
         String actualUrl = driver.getCurrentUrl();
-        System.out.println("Current URL: " + actualUrl);
+        ExtentReportUtil.logInfo("Current URL: " + actualUrl);
         Assert.assertEquals(actualUrl, "https://magang.dikahadir.com/dashboards/pending");
         ExtentReportUtil.logInfo("Menampilkan Dashboard");
-        ExtentReportUtil.logWithScreenshot("- Menampilkan Dashboard", driver);
     }
 }

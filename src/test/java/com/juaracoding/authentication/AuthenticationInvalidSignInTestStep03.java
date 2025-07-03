@@ -2,6 +2,7 @@ package com.juaracoding.authentication;
 
 import com.juaracoding.DriverSingleton;
 import com.juaracoding.loginPages.SignInPage;
+import com.juaracoding.utils.ExtentReportUtil;
 import com.juaracoding.utils.ScenarioContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -25,12 +26,15 @@ public class AuthenticationInvalidSignInTestStep03 {
     @When("Masukkan username valid {string} dan password salah {string}")
     public void testStep02(String username, String password) {
         signInPage.setUsername(username);
+        ExtentReportUtil.logInfo("Masukkan username");
         signInPage.setPassword(password);
+        ExtentReportUtil.logInfo("Masukkan password tidak valid");
     }
 
     @And("Klik tombol login untuk login tidak valid 03")
     public void testStep03() {
         signInPage.onClick();
+        ExtentReportUtil.logInfo("Klik tombol login dilakukan");
     }
 
     @Then("Pengguna akan melihat pesan error 03")
@@ -38,6 +42,7 @@ public class AuthenticationInvalidSignInTestStep03 {
         String expected = "Email atau password salah";
         String actual = signInPage.wrongUsernameAndPassword();
 
+        ExtentReportUtil.logInfo("Validation Message: " + expected);
         Assert.assertEquals(actual, expected);
     }
 }

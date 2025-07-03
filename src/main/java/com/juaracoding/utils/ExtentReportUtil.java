@@ -40,13 +40,18 @@ public class ExtentReportUtil {
         test.get().log(Status.FAIL, message);
     }
 
-    public static void logSkip(String message) {
-        test.get().log(Status.SKIP, message);
+    public static void logFailWithScreenshot(String message, WebDriver driver) {
+        logFail(message);
+        attachScreenshot("Failure Screenshot", driver);
     }
 
     public static void logWithScreenshot(String title, WebDriver driver) {
-        String path = ScreenshotUtil.takeScreenshot(driver, title);
+        attachScreenshot(title, driver);
+    }
+
+    private static void attachScreenshot(String title, WebDriver driver) {
         try {
+            String path = ScreenshotUtil.takeScreenshot(driver, title);
             test.get().addScreenCaptureFromPath(path, title);
         } catch (Exception e) {
             test.get().log(Status.WARNING, "Gagal menambahkan screenshot: " + e.getMessage());

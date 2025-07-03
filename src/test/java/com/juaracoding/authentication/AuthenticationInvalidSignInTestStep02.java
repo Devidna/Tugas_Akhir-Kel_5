@@ -4,6 +4,7 @@ import com.juaracoding.DriverSingleton;
 import com.juaracoding.loginPages.SignInPage;
 import com.juaracoding.utils.ExtentReportUtil;
 import com.juaracoding.utils.ScenarioContext;
+import com.juaracoding.utils.utils;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -29,12 +30,14 @@ public class AuthenticationInvalidSignInTestStep02 {
         signInPage.setUsername(username);
         ExtentReportUtil.logInfo("Masukkan username");
         signInPage.setPassword(password);
-        ExtentReportUtil.logInfo("Masukkan password");
+        ExtentReportUtil.logInfo("Masukkan password tidak valid");
     }
 
     @And("Klik tombol login untuk login tidak valid 02")
     public void testStep03() {
         signInPage.onClick();
+        utils.delay(5);
+        ExtentReportUtil.logInfo("Klik tombol login dilakukan");
     }
 
     @Then("Pengguna akan melihat pesan error validasi email")

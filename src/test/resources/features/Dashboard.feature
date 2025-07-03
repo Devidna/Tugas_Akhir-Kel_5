@@ -1,4 +1,4 @@
-@dashboard
+
 Feature: Dashboard Hadir
 
   @smoketest @medium @positive

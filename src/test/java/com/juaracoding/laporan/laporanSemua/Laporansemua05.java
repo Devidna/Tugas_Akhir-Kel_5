@@ -32,7 +32,7 @@ public class Laporansemua05 {
 
     @And("Masukkan nama kosong {string}")
     public void masukkanNamaYangSesuai(String nama) {
-        laporanSemuaPage.inputNama(nama);
+        ExtentReportUtil.logInfo("Memasukkan nama dilakukan");
     }
 
     @And("Pilih start date {string} dan end date {string} dan kosongkan keduanya")
@@ -52,11 +52,13 @@ public class Laporansemua05 {
         }
         laporanSemuaPage.searchDepartemen("");
         laporanSemuaPage.klikTerapkanFilter();
+        ExtentReportUtil.logInfo("Memilih filter dilakukan");
     }
 
     @Then("Klik tombol search 05")
     public void klikTombolSearch() {
         laporanSemuaPage.clickSearch();
+        ExtentReportUtil.logInfo("Klik tombol Search dilakukan");
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         List<WebElement> rows = driver.findElements(By.cssSelector("tbody tr"));

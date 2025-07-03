@@ -2,6 +2,7 @@ package com.juaracoding.authentication;
 
 import com.juaracoding.DriverSingleton;
 import com.juaracoding.loginPages.SignInPage;
+import com.juaracoding.utils.ExtentReportUtil;
 import com.juaracoding.utils.ScenarioContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -25,12 +26,15 @@ public class AuthenticationInvalidSignInTestStep06 {
     @When("Masukkan username kosong {string} dan password kosong {string}")
     public void testStep02(String username, String password) {
         signInPage.setUsername(username);
+        ExtentReportUtil.logInfo("Kosongkan username");
         signInPage.setPassword(password);
+        ExtentReportUtil.logInfo("Kosongkan password");
     }
 
     @And("Klik tombol login untuk login tidak valid 06")
     public void testStep03() {
         signInPage.onClick();
+        ExtentReportUtil.logInfo("Klik tombol login dilakukan");
     }
 
     @Then("Pengguna akan melihat pesan error 06")
@@ -38,6 +42,7 @@ public class AuthenticationInvalidSignInTestStep06 {
         String expected = "Akun tidak ditemukan";
         String actual = signInPage.getaccNotfound();
 
+        ExtentReportUtil.logInfo("Validation Message: " + expected);
         Assert.assertEquals(actual, expected);
     }
 }

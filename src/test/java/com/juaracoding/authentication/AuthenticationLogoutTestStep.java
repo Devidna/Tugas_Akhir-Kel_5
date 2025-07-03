@@ -3,6 +3,8 @@ package com.juaracoding.authentication;
 import com.juaracoding.DriverSingleton;
 import com.juaracoding.dashboardPages.ProfilPage;
 import com.juaracoding.loginPages.SignInPage;
+import com.juaracoding.utils.ExtentReportUtil;
+import com.juaracoding.utils.ScenarioContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -21,6 +23,7 @@ public class AuthenticationLogoutTestStep {
 
     @Given("Buka halaman login")
     public void testStep01() {
+        System.out.println("[TEST] " + ScenarioContext.getScenarioName());
         driver = DriverSingleton.createOrGetDriver();
         driver.get("https://magang.dikahadir.com/authentication/login");
         signInPage = new SignInPage(driver);
@@ -30,19 +33,20 @@ public class AuthenticationLogoutTestStep {
     @When("Masukkan username {string} dan password {string}  valid")
     public void testStep02(String username, String password) {
         signInPage.setUsername(username);
+        ExtentReportUtil.logInfo("Masukkan username");
         signInPage.setPassword(password);
-        System.out.println("masukin password");
+        ExtentReportUtil.logInfo("Masukkan password");
     }
 
     @And("Klik tombol login untuk login  valid")
     public void testStep03() {
-        System.out.println("ini setelah klik login");
         signInPage.onClick();
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        ExtentReportUtil.logInfo("Klik tombol login dilakukan");
     }
 
 
@@ -50,7 +54,7 @@ public class AuthenticationLogoutTestStep {
     public void testStep04() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         String actualUrl = driver.getCurrentUrl();
-        System.out.println("Current URL: " + actualUrl);
+        ExtentReportUtil.logInfo("Current URL: " + actualUrl);
         Assert.assertEquals(actualUrl, "https://magang.dikahadir.com/dashboards/pending");
 
         profilepage.navbarButton();
@@ -60,12 +64,13 @@ public class AuthenticationLogoutTestStep {
     public void testStep05() {
 
         profilepage.logoutButton();
+        ExtentReportUtil.logInfo("Klik tombol logout dilakukan");
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.urlContains("/authentication/login"));
 
         String actualUrl = driver.getCurrentUrl();
-        System.out.println("Current URL: " + actualUrl);
+        ExtentReportUtil.logInfo("Current URL: " + actualUrl);
         Assert.assertEquals(actualUrl, "https://magang.dikahadir.com/authentication/login");
     }
 }

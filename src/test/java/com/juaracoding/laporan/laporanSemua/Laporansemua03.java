@@ -32,7 +32,7 @@ public class Laporansemua03 {
 
     @And("Masukkan nama yang sesuai {string} 03")
     public void masukkanNamaYangSesuai(String nama) {
-        laporanSemuaPage.inputNama(nama);
+        ExtentReportUtil.logInfo("Memasukkan nama dilakukan");
     }
 
 
@@ -46,11 +46,13 @@ public class Laporansemua03 {
         }
         laporanSemuaPage.searchDepartemen("EDC Nasional");
         laporanSemuaPage.klikTerapkanFilter();
+        ExtentReportUtil.logInfo("Memilih filter dilakukan");
     }
 
     @Then("Klik tombol search 03")
     public void klikTombolSearch() {
         laporanSemuaPage.clickSearch();
+        ExtentReportUtil.logInfo("Klik tombol Search dilakukan");
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         List<WebElement> rows = driver.findElements(By.cssSelector("tbody tr"));

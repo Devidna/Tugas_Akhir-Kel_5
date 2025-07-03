@@ -20,11 +20,9 @@ public class DashboardPage {
     @FindBy(xpath = "//p[@class='MuiTypography-root MuiTypography-body1 css-1kei35f']")
     private WebElement titleDashboard;
 
-    // Semua label statistik dashboard
     @FindBy(xpath = "//h3[normalize-space()]")
     private List<WebElement> labelStats;
 
-    // Semua value statistik dashboard
     @FindBy(xpath = "//p[normalize-space()]")
     private List<WebElement> valueStats;
 
@@ -34,8 +32,7 @@ public class DashboardPage {
     }
 
     public void bukaMenuDashboard() {
-        subMenuDashboard.click();
-        utils.delay(2);
+        utils.waitUntilClickable(driver, subMenuDashboard, 10).click();
     }
 
     public boolean isDashboardTitleDisplayed() {

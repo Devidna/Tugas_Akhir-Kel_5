@@ -28,14 +28,15 @@ public class AuthenticationInvalidSignInTestStep {
     @When("Masukkan username {string} dan password {string} tidak valid")
     public void testStep02(String username, String password) {
         signInPage.setUsername(username);
-        ExtentReportUtil.logInfo("Masukkan username");
+        ExtentReportUtil.logInfo("Masukkan username tidak valid");
         signInPage.setPassword(password);
-        ExtentReportUtil.logInfo("Masukkan password");
+        ExtentReportUtil.logInfo("Masukkan password tidak valid");
     }
 
     @And("Klik tombol login untuk login tidak valid")
     public void testStep03() {
         signInPage.onClick();
+        ExtentReportUtil.logInfo("Klik tombol login dilakukan");
     }
 
     @Then("Pengguna akan melihat pesan error")
@@ -43,7 +44,7 @@ public class AuthenticationInvalidSignInTestStep {
         String expected = "Akun tidak ditemukan";
         String actual = signInPage.getaccNotfound();
 
-        ExtentReportUtil.logInfo("Akun tidak ditemukan");
+        ExtentReportUtil.logInfo("Validation Message: " + expected);
         Assert.assertEquals(actual, expected);
     }
 }

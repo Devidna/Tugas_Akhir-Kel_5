@@ -15,7 +15,7 @@ public class LaporanKehadiranTest {
     LaporanKehadiranPage lKP;
 
     @Given("Admin login dan membuka laporan kehadiran")
-    public void adminLogin() throws InterruptedException {
+    public void adminLogin() {
         System.out.println("[TEST] " + ScenarioContext.getScenarioName());
         driver = DriverSingleton.createOrGetDriver();
         lKP = new LaporanKehadiranPage(driver);
@@ -31,7 +31,7 @@ public class LaporanKehadiranTest {
     }
 
     @When("Input nama {string}, tanggal {string} hingga {string}, dan unit {string}")
-    public void isiFormLaporan(String nama, String start, String end, String dept) throws InterruptedException {
+    public void isiFormLaporan(String nama, String start, String end, String dept) {
         ExtentReportUtil.logInfo("Input form: nama=" + nama + ", tanggal=" + start + " - " + end + ", unit=" + dept);
 
         if (!nama.isEmpty()) {
@@ -47,6 +47,7 @@ public class LaporanKehadiranTest {
             lKP.KlikFilterTerapkan();
         }
         lKP.klikSearch();
+        ExtentReportUtil.logInfo("Klik tombol Search dilakukan");
     }
 
     @And("Klik tombol reset filter laporan")
@@ -59,12 +60,6 @@ public class LaporanKehadiranTest {
     public void klikExportData() {
         lKP.klikExport();
         ExtentReportUtil.logInfo("Klik tombol Export dilakukan");
-
-        if (lKP.isExportErrorToastDisplayed()) {
-            ExtentReportUtil.logFail("Export gagal: Muncul error toast");
-        } else {
-            ExtentReportUtil.logInfo("Export berhasil tanpa error toast");
-        }
     }
 
     @And("Klik pagination dan pilih {string} rows")
@@ -82,7 +77,6 @@ public class LaporanKehadiranTest {
     @Then("Form filter laporan kembali kosong")
     public void formKosong() {
         boolean isKosong = lKP.isFormKosong();
-
         ExtentReportUtil.logInfo("Validasi form kosong setelah reset: " + isKosong);
 
         if (isKosong) {
@@ -90,6 +84,16 @@ public class LaporanKehadiranTest {
         } else {
             ExtentReportUtil.logFail("Form tidak kosong setelah reset");
             Assert.fail("Form tidak kosong setelah reset");
+        }
+    }
+
+    @Then("Cek hasil export data laporan")
+    public void cekHasilExport() {
+        if (lKP.isExportErrorToastDisplayed()) {
+            ExtentReportUtil.logFail("Export gagal: Muncul error toast");
+            Assert.fail("Export gagal: Muncul error toast");
+        } else {
+            ExtentReportUtil.logPass("Export berhasil tanpa error toast");
         }
     }
 

@@ -4,6 +4,7 @@ import com.juaracoding.DriverSingleton;
 import com.juaracoding.authentication.LoginHelper;
 import com.juaracoding.laporanPages.LaporanSemuaPage;
 import com.juaracoding.utils.ExtentReportUtil;
+import com.juaracoding.utils.ScenarioContext;
 import io.cucumber.java.en.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,7 +23,7 @@ public class Laporansemua01 {
 
     @Given("Login")
     public void loginAcc(){
-
+        System.out.println("[TEST] " + ScenarioContext.getScenarioName());
         driver = DriverSingleton.createOrGetDriver();
         LoginHelper loginHelper = new LoginHelper(driver);
         loginHelper.performLogin("admin@hadir.com", "MagangSQA_JC@123");
@@ -36,6 +37,7 @@ public class Laporansemua01 {
 
     @And("Masukkan nama yang sesuai {string}")
     public void masukkanNamaYangSesuai(String nama) {
+        ExtentReportUtil.logInfo("Memasukkan nama dilakukan");
         laporanSemuaPage.inputNama(nama);
     }
 
@@ -44,6 +46,7 @@ public class Laporansemua01 {
         laporanSemuaPage.dateButton();
         laporanSemuaPage.setStartDate(startDate);
         laporanSemuaPage.setEndDate(endDate);;
+        ExtentReportUtil.logInfo("Memilih tanggal dilakukan");
     }
 
     @And("Klik tombol filter untuk melakukan filter berdasarkan department")
@@ -56,11 +59,13 @@ public class Laporansemua01 {
         }
         laporanSemuaPage.searchDepartemen("EDC Nasional");
         laporanSemuaPage.klikTerapkanFilter();
+        ExtentReportUtil.logInfo("Memilih filter dilakukan");
     }
 
     @Then("Klik tombol search")
     public void klikTombolSearch() {
         laporanSemuaPage.clickSearch();
+        ExtentReportUtil.logInfo("Klik tombol Search dilakukan");
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("tbody tr")));

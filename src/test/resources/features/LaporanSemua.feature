@@ -4,7 +4,7 @@ Feature: Laporan semua
   Background:
     Given Login
 
-  @filterData @smoketest @high @positive
+  @smoketest @high @positive
   Scenario Outline: Menampilkan data laporan semua dengan nama dan tanggal yang sesuai
     When Klik menu laporan semua
     And Masukkan nama yang sesuai "<nama>"
@@ -16,6 +16,7 @@ Feature: Laporan semua
       | nama         | startDate  | endDate    |
       | komar | Jun 20, 2025 | Jun 20, 2025 |
 
+  @smoketest @high @positive
   Scenario Outline: Menampilkan  data laporan semua dengan tidak menuliskan nama
     When Klik menu laporan semua 02
     And Masukkan nama yang kosong "<nama>"
@@ -27,6 +28,7 @@ Feature: Laporan semua
       | nama         | startDate  | endDate    |
       |              | Jun 20, 2025 | Jun 20, 2025 |
 
+  @smoketest @high @positive
   Scenario Outline: Menampilkan  data laporan semua dengan tidak memilih tanggal star date dan end date
     When Klik menu laporan semua 03
     And Masukkan nama yang sesuai "<nama>" 03
@@ -37,6 +39,7 @@ Feature: Laporan semua
       | nama  |
       | komar |
 
+  @smoketest @high @positive
   Scenario Outline: Menampilkan  data laporan semua dengan tidak memilih filter departement
     When Klik menu laporan semua 04
     And Masukkan nama yang sesuai "<nama>" 04
@@ -48,6 +51,7 @@ Feature: Laporan semua
       | nama         | startDate  | endDate    |
       |       komar    |  Jun 20, 2025 | Jun 20, 2025 |
 
+  @sanitytest @medium @negative
   Scenario Outline: Menampilkan  data laporan semua dengan tidak memasukkan nama, tidak memilih tanggal star date dan end date dan tidak memilih filter departement
     When Klik menu laporan semua 05
     And Masukkan nama kosong "<nama>"

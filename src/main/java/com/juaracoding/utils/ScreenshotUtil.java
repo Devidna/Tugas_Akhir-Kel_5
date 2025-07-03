@@ -25,10 +25,6 @@ public class ScreenshotUtil {
         String relativePath = folder + fileName;
         String fullPath = "target/" + relativePath;
 
-//        String fileName = scenarioName.replaceAll(" ", "_") + "_" + stepName.replaceAll(" ", "_") + "_" + ".png";
-//        String relativePath = folder + fileName;
-//        String fullPath = "target/" + relativePath;
-
         File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         try {
             File dest = new File(fullPath);

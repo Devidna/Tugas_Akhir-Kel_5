@@ -5,6 +5,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,6 +69,9 @@ public class LaporanKehadiranPage {
     @FindBy(xpath = "//div[@role='combobox']")
     private WebElement showPageDropdown;
 
+    @FindBy(xpath = "//li[contains(@class,'MuiAutocomplete-option')]")
+    private List<WebElement> dropdownSuggest;
+
     @FindBy(xpath = "//tbody/tr")
     private List<WebElement> tableRows;
 
@@ -76,72 +80,72 @@ public class LaporanKehadiranPage {
         PageFactory.initElements(driver, this);
     }
 
-    public void bukaMenuLaporanKehadiran() throws InterruptedException {
-        menuLaporan.click();
-        utils.delay(2);
-        subMenuKehadiran.click();
-        utils.delay(2);
+    public void bukaMenuLaporanKehadiran() {
+        utils.waitUntilClickable(driver, menuLaporan, 10).click();
+        utils.waitUntilClickable(driver, subMenuKehadiran, 10).click();
     }
 
     public void isiNama(String nama) {
-        inputNama.clear();
+        utils.waitUntilVisible(driver, inputNama, 10).clear();
         inputNama.sendKeys(nama);
-        utils.delay(2);
     }
 
     public void setTanggal(String startDate, String endDate) {
-        btnCalender.click();
-        utils.delay(2);
-        setStartDate.click();
-        setStartDate.sendKeys(Keys.chord(Keys.CONTROL, "a"));
-        setStartDate.sendKeys(Keys.DELETE);
-        setStartDate.sendKeys(startDate);
-        utils.delay(2);
-        setEndDate.click();
-        setEndDate.sendKeys(Keys.chord(Keys.CONTROL, "a"));
-        setEndDate.sendKeys(Keys.DELETE);
-        setEndDate.sendKeys(endDate);
-        utils.delay(2);
+        utils.waitUntilClickable(driver, btnCalender, 10).click();
+
+        WebElement startDateElement = utils.waitUntilClickable(driver, setStartDate, 10);
+        startDateElement.click();
+        startDateElement.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+        startDateElement.sendKeys(Keys.DELETE);
+        startDateElement.sendKeys(startDate);
+
+        WebElement endDateElement = utils.waitUntilClickable(driver, setEndDate, 10);
+        endDateElement.click();
+        endDateElement.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+        endDateElement.sendKeys(Keys.DELETE);
+        endDateElement.sendKeys(endDate);
     }
 
     public void klikSave() {
-        btnSave.click();
-        utils.delay(2);
+        utils.waitUntilClickable(driver, btnSave, 10).click();
     }
 
     public void pilihDepartemen(String departemen) {
-        selectUnit.clear();
-        selectUnit.click();
-        selectUnit.sendKeys(departemen);
-        utils.delay(2);
-        selectUnit.sendKeys(Keys.ARROW_DOWN);
-        utils.delay(2);
-        selectUnit.sendKeys(Keys.ENTER);
-        utils.delay(2);
+        WebElement unitField = utils.waitUntilClickable(driver, selectUnit, 10);
+        unitField.clear();
+        unitField.click();
+        unitField.sendKeys(departemen);
+
+        if (isSuggestionVisible()) {
+            unitField.sendKeys(Keys.ARROW_DOWN);
+            unitField.sendKeys(Keys.ENTER);
+        }
+    }
+
+    private boolean isSuggestionVisible() {
+        try {
+            utils.waitUntilVisible(driver, dropdownSuggest.get(0), 5);
+            return dropdownSuggest != null && !dropdownSuggest.isEmpty();
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public void klikFilter() {
-        btnFilter.click();
-        utils.delay(2);
+        utils.waitUntilClickable(driver, btnFilter, 10).click();
     }
 
     public void KlikFilterTerapkan() {
-        btnFilterTerapkan.click();
-        utils.delay(2);
+        utils.waitUntilClickable(driver, btnFilterTerapkan, 10).click();
     }
 
-    public void klikSearch() throws InterruptedException {
-        btnSearch.click();
-        utils.delay(2);
+    public void klikSearch() {
+        utils.waitUntilClickable(driver, btnSearch, 10).click();
+        utils.waitUntilVisible(driver, driver.findElement(By.xpath("//tbody")), 10);
     }
 
     public void klikReset() {
-        btnReset.click();
-        utils.delay(2);
-    }
-
-    private boolean isNullOrEmpty(String value) {
-        return value == null || value.isEmpty();
+        utils.waitUntilClickable(driver, btnReset, 10).click();
     }
 
     public boolean isFormKosong() {
@@ -155,46 +159,52 @@ public class LaporanKehadiranPage {
         }
     }
 
-    public void klikLihatLokasi() {
-        try {
-            if (linkLihatLokasi.isDisplayed()) {
-                linkLihatLokasi.click();
-                utils.delay(2);
-            }
-        } catch (Exception e) {
-            System.out.println("Link lihat lokasi tidak ditemukan.");
-        }
+    private boolean isNullOrEmpty(String value) {
+        return value == null || value.isEmpty();
     }
 
     public void klikExport() {
-        btnExport.click();
-        utils.delay(2);
-        btnExportData.click();
-        utils.delay(2);
+        utils.waitUntilClickable(driver, btnExport, 10).click();
+        utils.waitUntilClickable(driver, btnExportData, 10).click();
     }
 
     public boolean isExportErrorToastDisplayed() {
         try {
-            return toastErrorExport.isDisplayed();
-        } catch (NoSuchElementException e) {
+            return utils.waitUntilVisible(driver, toastErrorExport, 5).isDisplayed();
+        } catch (TimeoutException | NoSuchElementException e) {
             return false;
         }
     }
 
+    public void klikLihatLokasi() {
+        try {
+            if (utils.waitUntilVisible(driver, linkLihatLokasi, 5).isDisplayed()) {
+                linkLihatLokasi.click();
+            }
+        } catch (TimeoutException | NoSuchElementException e) {
+            System.out.println("Link lihat lokasi tidak ditemukan.");
+        }
+    }
+
     public void pilihShowPage(String jumlah) {
-        showPageDropdown.click();
-        WebElement opsiJumlah = driver.findElement(By.xpath("//li[normalize-space(text())='" + jumlah + "']"));
+        utils.waitUntilClickable(driver, showPageDropdown, 10).click();
+        WebElement opsiJumlah = utils.waitUntilClickable(driver,
+                driver.findElement(By.xpath("//li[normalize-space(text())='" + jumlah + "']")), 10);
         opsiJumlah.click();
-        utils.delay(2);
+
+        int expectedRow = Integer.parseInt(jumlah);
+        utils.waitUntilRowCountEquals(driver, tableRows, expectedRow, 10);
     }
 
     public String getTableRowText(int index) {
         try {
+            utils.waitUntilVisible(driver, tableRows.get(index), 10);
             return tableRows.get(index).getText();
         } catch (Exception e) {
             return null;
         }
     }
+
 
     public List<String> getAllTableRowTexts() {
         List<String> texts = new ArrayList<>();
@@ -207,5 +217,4 @@ public class LaporanKehadiranPage {
     public int getRowCount() {
         return tableRows.size();
     }
-
 }

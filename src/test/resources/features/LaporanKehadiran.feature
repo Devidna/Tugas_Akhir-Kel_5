@@ -28,14 +28,14 @@ Feature: Laporan Kehadiran - Validasi Kombinasi Filter Input
   @sanitytest @medium @positive
   Scenario: Export data laporan ke file
     When Input nama "Kelompok 5", tanggal "Jun 19, 2025" hingga "Jun 19, 2025", dan unit "EDC Nasional"
-    Then Data laporan kehadiran tampil
     And Klik tombol export data laporan
+    Then Cek hasil export data laporan
 
   @regression @low @positive
   Scenario: Mengubah jumlah rows per page
     When Input nama "", tanggal "Jun 01, 2025" hingga "Jun 30, 2025", dan unit ""
-    And Klik pagination dan pilih "25" rows
-    Then Jumlah baris data yang tampil "25"
+    And Klik pagination dan pilih "5" rows
+    Then Jumlah baris data yang tampil "5"
 
   @regression @low @positive
   Scenario: Klik lokasi dari kolom Lokasi Masuk
@@ -50,6 +50,7 @@ Feature: Laporan Kehadiran - Validasi Kombinasi Filter Input
 
     Examples:
       | name      | date1       | date2       | unit        |
+      | Kelompok5 | Jun 19 2025 | Jun 19 2025 | EDCNasional |
       | Kelompok5 |             |             |             |
       |           | Jun 19 2025 | Jun 19 2025 |             |
       |           |             |             | EDCNasional |

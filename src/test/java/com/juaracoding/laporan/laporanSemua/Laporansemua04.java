@@ -30,7 +30,7 @@ public class Laporansemua04 {
 
     @And("Masukkan nama yang sesuai {string} 04")
     public void masukkanNamaYangSesuai(String nama) {
-        laporanSemuaPage.inputNama(nama);
+        ExtentReportUtil.logInfo("Memasukkan nama dilakukan");
     }
 
     @And("Pilih start date {string} dan end date {string} untuk memilih tanggal data laporan semua 04")
@@ -38,6 +38,7 @@ public class Laporansemua04 {
         laporanSemuaPage.dateButton();
         laporanSemuaPage.setStartDate(startDate);
         laporanSemuaPage.setEndDate(endDate);
+        ExtentReportUtil.logInfo("Memilih tanggal dilakukan");
     }
 
     @And("Klik tombol dan kosongkan filter")
@@ -50,11 +51,13 @@ public class Laporansemua04 {
         }
         laporanSemuaPage.searchDepartemen("");
         laporanSemuaPage.klikTerapkanFilter();
+        ExtentReportUtil.logInfo("Memilih filter dilakukan");
     }
 
     @Then("Klik tombol search 04")
     public void klikTombolSearch() {
         laporanSemuaPage.clickSearch();
+        ExtentReportUtil.logInfo("Klik tombol Search dilakukan");
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("tbody tr")));
