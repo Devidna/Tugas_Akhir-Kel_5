@@ -11,10 +11,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 
-public class DashboardAndPending {
+public class DashboardPendingTest {
     PendingPage pendingPage;
 
-    public DashboardAndPending() {
+    public DashboardPendingTest() {
         pendingPage = new PendingPage();
     }
 

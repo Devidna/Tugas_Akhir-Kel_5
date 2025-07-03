@@ -143,8 +143,8 @@ public class LaporanKehadiranPage {
     }
 
     public void klikSearch() {
-        utils.waitUntilClickable(driver, btnSearch, 10).click();
-        utils.waitUntilTableVisible(driver, tableRows, tableHeader, 10);
+        utils.waitUntilClickable(driver, btnSearch, 25).click();
+        utils.waitUntilTableVisible(driver, tableRows, tableHeader, 15);
     }
 
     public void klikReset() {

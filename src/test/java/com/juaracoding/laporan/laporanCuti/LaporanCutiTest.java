@@ -11,10 +11,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 
-public class LaporanCuti {
+public class LaporanCutiTest {
     LaporanCutiPage laporanCutiPage;
 
-    public LaporanCuti() {
+    public LaporanCutiTest() {
         laporanCutiPage = new LaporanCutiPage();
     }
 

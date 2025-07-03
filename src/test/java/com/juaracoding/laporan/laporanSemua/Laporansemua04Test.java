@@ -16,25 +16,24 @@ import org.testng.Assert;
 import java.time.Duration;
 import java.util.List;
 
-public class Laporansemua02 {
+public class Laporansemua04Test {
 
     WebDriver driver;
     LaporanSemuaPage laporanSemuaPage;
 
-    @When("Klik menu laporan semua 02")
+    @When("Klik menu laporan semua 04")
     public void klikMenuLaporanSemua() {
         driver = DriverSingleton.createOrGetDriver();
         laporanSemuaPage = new LaporanSemuaPage(driver);
         laporanSemuaPage.goToLaporanSemua();
     }
 
-    @And("Masukkan nama yang kosong {string}")
+    @And("Masukkan nama yang sesuai {string} 04")
     public void masukkanNamaYangSesuai(String nama) {
-        laporanSemuaPage.inputNama(nama);
         ExtentReportUtil.logInfo("Memasukkan nama dilakukan");
     }
 
-    @And("Pilih start date {string} dan end date {string} untuk memilih tanggal data laporan semua 02")
+    @And("Pilih start date {string} dan end date {string} untuk memilih tanggal data laporan semua 04")
     public void pilihTanggal(String startDate, String endDate) {
         laporanSemuaPage.dateButton();
         laporanSemuaPage.setStartDate(startDate);
@@ -42,7 +41,7 @@ public class Laporansemua02 {
         ExtentReportUtil.logInfo("Memilih tanggal dilakukan");
     }
 
-    @And("Klik tombol filter untuk melakukan filter berdasarkan department 02")
+    @And("Klik tombol dan kosongkan filter")
     public void klikTombolFilter() {
         laporanSemuaPage.clickFilter();
         try {
@@ -50,12 +49,12 @@ public class Laporansemua02 {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        laporanSemuaPage.searchDepartemen("EDC Nasional");
+        laporanSemuaPage.searchDepartemen("");
         laporanSemuaPage.klikTerapkanFilter();
         ExtentReportUtil.logInfo("Memilih filter dilakukan");
     }
 
-    @Then("Klik tombol search 02")
+    @Then("Klik tombol search 04")
     public void klikTombolSearch() {
         laporanSemuaPage.clickSearch();
         ExtentReportUtil.logInfo("Klik tombol Search dilakukan");
@@ -68,7 +67,7 @@ public class Laporansemua02 {
 
         for (WebElement row : rows) {
             String nama = row.findElement(By.cssSelector("td:nth-child(2) h6")).getText();
-            ExtentReportUtil.logInfo("Row ditemukan dengan nama: " + nama);
+            System.out.println("Row ditemukan dengan nama: " + nama); // debug
             if (nama.equalsIgnoreCase("komar")) {
                 dataDitemukan = true;
                 break;

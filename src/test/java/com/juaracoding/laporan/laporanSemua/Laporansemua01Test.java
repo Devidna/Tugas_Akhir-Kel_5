@@ -16,7 +16,7 @@ import org.testng.Assert;
 import java.time.Duration;
 import java.util.List;
 
-public class Laporansemua01 {
+public class Laporansemua01Test {
 
     WebDriver driver;
     LaporanSemuaPage laporanSemuaPage;
