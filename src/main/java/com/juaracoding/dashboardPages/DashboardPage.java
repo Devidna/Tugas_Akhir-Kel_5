@@ -34,8 +34,7 @@ public class DashboardPage {
     }
 
     public void bukaMenuDashboard() {
-        subMenuDashboard.click();
-        utils.delay(2);
+        utils.waitUntilClickable(driver, subMenuDashboard, 10).click();
     }
 
     public boolean isDashboardTitleDisplayed() {
