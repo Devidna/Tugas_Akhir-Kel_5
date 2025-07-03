@@ -144,7 +144,7 @@ public class LaporanKehadiranPage {
 
     public void klikSearch() {
         utils.waitUntilClickable(driver, btnSearch, 10).click();
-        utils.delay(2);
+        utils.delay(5);
         utils.waitUntilTableVisible(driver, tableRows, tableHeader, 10);
     }
 

@@ -67,7 +67,7 @@ public class Laporansemua04Test {
 
         for (WebElement row : rows) {
             String nama = row.findElement(By.cssSelector("td:nth-child(2) h6")).getText();
-            System.out.println("Row ditemukan dengan nama: " + nama); // debug
+            ExtentReportUtil.logInfo("Row ditemukan dengan nama: " + nama);
             if (nama.equalsIgnoreCase("komar")) {
                 dataDitemukan = true;
                 break;
